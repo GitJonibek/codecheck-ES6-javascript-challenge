@@ -1,1 +1,142 @@
 
+hello.js: -->
+  export function hello(name) {
+    return "Hello " + name.toString() + "!";
+  }
+
+//----------------------------------------------------------------------
+
+person.js: -->
+
+export class Person {
+  constructor(name){this.name = name;}
+    
+  hello() {
+    return `Hello! My name is ${this.name}`;
+  }
+}
+
+//----------------------------------------------------------------------
+
+polygon.js: -->
+
+//Abstract super class Polygon
+export class Polygon {
+
+  constructor(height, width) {
+    this.name = "Polygon";
+    this.height = height;
+    this.width = width;
+  }
+}
+
+export class Rectangle extends Polygon {
+
+  constructor(height, width) {
+    super(height, width)
+    this.name = "Rectangle";
+  }
+  get area() { return this.height * this.width;}
+}
+
+export class Square extends Polygon {
+  
+  constructor(height) {
+    super(height, height)
+    this.name = "Square";
+  }
+  get area() { return this.height * this.height;}
+}
+
+export class Circle {
+  
+  constructor(temp) {
+     this.temp = temp;
+     this.width = temp*2
+      this.height = temp*2
+     this.name = "Circle";
+  }
+  get area() { return Math.PI * (this.temp) * (this.temp);}
+}
+
+//----------------------------------------------------------------------
+
+promise.js; -->
+
+export function sleep(time) {
+  return new Promise(function(success, fail){
+  	if (time < 0) {
+    	fail(time);
+    }
+    else {
+      setTimeout(() => success(time), time);
+    }
+  });
+}
+
+//----------------------------------------------------------------------
+
+cipher.js: -->
+
+export class Cipher {
+
+  encrypt(str) { return str;}
+  decrypt(str) { return str;}
+
+}
+
+export class CaesarCipher extends Cipher {
+    
+    constructor(some){
+        super(); 
+        this.some = some;
+    }
+    
+    encrypt(str){
+        var result = [];
+        let valstr = str.toLowerCase();
+        let dif = this.some;
+  	    str = str.replace(/[<>@#$%^&*()0-9.;,:`'!"]/g, " ").trim();
+        
+        valstr.split('').forEach(function(i){
+            var temp = i.charCodeAt(0);
+            if(temp < 123 && temp > 96)
+                temp += dif;
+
+            if(temp > 122)
+                temp = 96 + (temp - 122);
+        
+            result.push(String.fromCharCode(temp));
+        });
+        result = result.join('').trim();
+  
+        if(result[result.length-1] != "!")    
+  	        return result+"!"; 
+        return result;
+    };
+    
+    decrypt(str){
+        var result = [];
+        let valstr = str.toLowerCase();
+        let dif = this.some;
+  	    str = str.replace(/[<>@#$%^&*0-9.;,:`'!"]/gi, ' ').trim();
+        
+        valstr.split('').forEach(function(i){
+            var temp = i.charCodeAt(0);
+        
+            if(temp < 123 && temp > 96)
+                temp -= dif;
+        
+            if(temp < 97)
+                temp = 123 - (97 - temp);
+        
+            result.push(String.fromCharCode(temp));
+        });
+  		
+        result = result.join('').replace(/[;:]/g, " ").trim();
+  		if(result[result.length-1] != "!")    
+  	        return result+"!"; 
+        return result;
+    }
+}
+
