@@ -36,6 +36,7 @@ Complete promise.js to pass test
 
 Specification
 sleep function returns Promise. Its value is specified time.
+
 sleep function finish asynchronously after specified time.
 if specified time is less than 0, the Promise rejected.
 You can use setTimeout in sleep function.
